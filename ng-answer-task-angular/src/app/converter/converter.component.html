@@ -1,0 +1,32 @@
+<div class="container">
+    <div *ngIf="toggle; else noCurrentCourse">
+        Текущий курс на <b>{{ currentData }}</b> с API сайта
+        <a href='{{sourceUrl}}'>bank.gov.ua</a>:
+        <div> 1 USD =<span> {{ currentCourseOfUsd }}</span> UAH</div>
+        <div> 1 EUR =<span> {{ currentCourseOfEur }}</span> UAH</div>
+    </div> 
+    <ng-template #noCurrentCourse>
+        <p style="text-align: center">Пожалуйста подождите! Мы обновляем курсы валют</p>
+    </ng-template>
+    <hr>
+    <div class="main" *ngIf="toggle; else noConverter">
+        <h2>Конвертер валют:</h2>
+        <input type="number" placeholder="input value" (input)="inputFromHandler($event)" value="{{inputValueFrom}}">
+        <select name="convert-from" id="convert-from" (change)="onInputConvertFromChange($event)" value ="{{inputTypeFrom}}">
+            <option value="UAH">UAH</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+
+        to
+        <input type="number" placeholder="input value" (input)="inputToHandler($event)" value="{{inputValueTo}}">
+        <select name="convert-to" id="convert-to" (change)="onInputConvertToChange($event)" value="{{inputTypeTo}}">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="UAH">UAH</option>
+        </select>
+    </div>
+    <ng-template #noConverter>
+        <p style="text-align: center">Пожалуйста подождите! Мы обновляем курсы валют для конвертера</p>
+      </ng-template>
+</div>
